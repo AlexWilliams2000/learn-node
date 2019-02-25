@@ -1,0 +1,44 @@
+//- <!DOCTYPE html>
+//- html(lang="en")
+//-   head
+//-     meta(charset="UTF-8")
+//-     meta(name="viewport", content="width=device-width, initial-scale=1.0")
+//-     meta(http-equiv="X-UA-Compatible", content="ie=edge")
+//-     title Document
+//-   body
+
+//-     //- ul.dogs>li.dog.dog$$*10 - emmet
+//-     ul.dogs
+//-       li.dog.dog01  
+//-       li.dog.dog02
+//-       li.dog.dog03
+//-       li.dog.dog04
+//-       li.dog.dog05
+//-       li.dog.dog06
+//-       li.dog.dog07
+//-       li.dog.dog08
+//-       li.dog.dog09
+//-       li.dog.dog10
+
+//-     .wrapper.ohnoooo
+//-       //- Normally put logic in .js files instead of the template
+//-       - const upDog = dog.toUpperCase();
+//-       p.hello Hello my dog's name is #{dog.toUpperCase()}!
+//-       p.howAreYou I said #{upDog}!!!
+//-       span#yo Yo!!
+//-       img(src="dog.jpg" alt=`Dog ${dog}`)
+
+//-     h2 
+//-       | Hello
+//-       em How are you?
+
+extends layout
+
+//- block header
+//-   h1 Yo!
+
+block content
+  h2 Sale ends in #{h.moment().endOf('day').fromNow()}
+
+block footer
+  p Ssssup
