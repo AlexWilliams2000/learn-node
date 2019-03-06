@@ -1,0 +1,10 @@
+extends layout
+
+include mixins/_storeForm
+
+block content
+  .inner
+    //- h2 #{title} Page
+    //- or without text:
+    h2= title
+    +storeForm({ name: 'Tim Hortons' })
