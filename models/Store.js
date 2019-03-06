@@ -9,11 +9,22 @@ const storeSchema = new mongoose.Schema({
     trim: true,
     required: 'Please enter a store name!'
   },
-  slug: ,
-  description:,
-  tag:
+  slug: String,
+  description: {
+    type: String,
+    trim: true
+  },
+  tags: [String]
+});
+
+storeSchema.pre('save', function(next) {
+  if (!this.isModified('name')) {
+    next();
+    return; // or return next();
+  }
+  this.slug = slug(this.name);
+  next();
+  // TODO: make more resilient so slugs are unique
 });
 
 module.exports = mongoose.model('Store', storeSchema);
-
-
