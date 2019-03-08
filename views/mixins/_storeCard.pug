@@ -1,0 +1,14 @@
+mixin storeCard(store = {})
+  .store
+    .store__hero
+      .store__actions
+        .store__action.store__action--edit
+          a(href=`/stores/${store._id}/edit`)
+            //- See exports.icon in helpers.js
+            != h.icon('pencil')
+      img(src=`/uploads/${store.photo || 'store.png'}`)
+      h2.title
+        a(href=`/store/${store.slug}`) #{store.name}
+    .store__details
+      //- Trim really long store descriptions to 25 words
+      p= store.description.split(' ').slice(0, 25).join(' ').concat('...')
