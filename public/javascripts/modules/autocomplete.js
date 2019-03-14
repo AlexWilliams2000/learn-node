@@ -8,6 +8,7 @@ function autocomplete(input, latInput, lngInput) {
     const place = dropdown.getPlace();
     // Below shows all data available on a given location from the maps API, inc. photo's address, lat/lng etc.
     console.log(place);
+    // eslint compoains at this - non-functional since it's changing state of input variables, but we want to modify existing
     latInput.value = place.geometry.location.lat();
     lngInput.value = place.geometry.location.lng();
   });
