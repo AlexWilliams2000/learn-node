@@ -36,14 +36,21 @@ const storeSchema = new mongoose.Schema({
   photo: String
 });
 
-storeSchema.pre('save', function(next) {
+storeSchema.pre('save', async function(next) {
   if (!this.isModified('name')) {
     next();
     return; // or return next();
   }
   this.slug = slug(this.name);
+  // Find other stores with the same slug prefix (inc e.g. slug, slug-1, slug-2 etc.) 
+  const slugPattern = new RegExp(`^(${this.slug})((-[0-9]*$)?)$`, 'i');
+  const storeWithSlug = await this.constructor.find({ slug: slugPattern });
+
+  if (storeWithSlug.length) {
+    this.slug = `${this.slug}-${storeWithSlug.length + 1}`;
+  }
+
   next();
-  // TODO: make more resilient so slugs are unique
 });
 
 module.exports = mongoose.model('Store', storeSchema);
