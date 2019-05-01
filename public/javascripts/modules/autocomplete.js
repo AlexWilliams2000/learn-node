@@ -14,7 +14,7 @@ function autocomplete(input, latInput, lngInput) {
     latInput.value = place.geometry.location.lat();
     lngInput.value = place.geometry.location.lng();
 
-    const imageLink = place.photos[4].getUrl();
+    const imageLink = place.photos[6].getUrl();
 
     const sampleImage = document.createElement('a');
 
