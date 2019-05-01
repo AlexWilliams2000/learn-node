@@ -1,5 +1,6 @@
 const express = require('express');
 const storeController = require('../controllers/storeController');
+const userController = require('../controllers/userController');
 
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -25,5 +26,16 @@ router.get('/store/:slug', catchErrors(storeController.getStoreBySlug));
 
 router.get('/tags', catchErrors(storeController.getStoresByTag));
 router.get('/tags/:tag', catchErrors(storeController.getStoresByTag));
+<<<<<<< Updated upstream
+=======
+
+router.get('/login', userController.loginForm);
+
+router.get('/register', userController.registerForm);
+// 1. Validate the registration data
+// 2. Register the user
+// 3. Log the new user in
+router.post('/register', userController.validateRegister);
+>>>>>>> Stashed changes
 
 module.exports = router;
