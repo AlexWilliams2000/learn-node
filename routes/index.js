@@ -9,7 +9,10 @@ const router = express.Router();
 
 router.get('/', catchErrors(storeController.getStores));
 
-router.get('/add', storeController.addStore);
+router.get('/add',
+  authController.isLoggedIn,
+  storeController.addStore
+);
 router.post('/add',
   storeController.upload,
   catchErrors(storeController.resize),
