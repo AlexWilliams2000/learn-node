@@ -27,7 +27,10 @@ router.get('/store/:slug', catchErrors(storeController.getStoreBySlug));
 router.get('/tags', catchErrors(storeController.getStoresByTag));
 router.get('/tags/:tag', catchErrors(storeController.getStoresByTag));
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+>>>>>>> Stashed changes
 
 router.get('/login', userController.loginForm);
 
@@ -36,6 +39,9 @@ router.get('/register', userController.registerForm);
 // 2. Register the user
 // 3. Log the new user in
 router.post('/register', userController.validateRegister);
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 
 module.exports = router;
