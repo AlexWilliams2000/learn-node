@@ -81,18 +81,25 @@ exports.getStores = async (req, res) => {
 };
 
 exports.getStoreBySlug = async (req, res, next) => {
-  const store = await Store.findOne({ slug: req.params.slug });
+  const store = await Store.findOne({ slug: req.params.slug }).populate('author');
   if (!store) {
     return next();
   }
   res.render('store', { store, title: store.name });
 };
 
+const confirmOwner = (store, user) => {
+  if (!store.author.equals(user._id)) {
+    // Surely this should be a flash?! Else the page displays a stack trace...
+    throw Error('You must own a store in order to edit it!');
+  }
+};
+
 exports.editStore = async (req, res) => {
   // 1. Find the store given the ID
   const store = await Store.findOne({ _id: req.params.id });
   // 2. Confirm user owns the store
-  // TODO
+  confirmOwner(store, req.user);
   // 3. Render out the edit form so the user can update it
   res.render('editStore', { title: `Edit ${store.name}`, store });
 };
