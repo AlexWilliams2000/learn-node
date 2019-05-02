@@ -50,6 +50,7 @@ exports.resize = async (req, res, next) => {
 };
 
 exports.createStore = async (req, res) => {
+  req.body.author = req.user._id;
   const store = new Store(req.body);
   store.age = 10;
   console.log(`Store slug before save = ${store.slug}`);
