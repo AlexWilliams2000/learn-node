@@ -65,6 +65,10 @@ storeSchema.pre('save', async function(next) {
   next();
 });
 
+// Can add another pre save here to sanitise data being saved 
+// e.g. strip out images that have been added where there should be only text,
+// or remove malicious code
+
 storeSchema.statics.getTagsList = function() {
   return this.aggregate([
     { $unwind: '$tags'},
