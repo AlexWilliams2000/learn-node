@@ -128,9 +128,28 @@ exports.searchStores = async (req, res) => {
       $search: req.query.q
     }
   }, {
-    score: { $meta: 'textScore' }
+    score: { $meta: 'textScore' }``
   }).sort({
     score: { $meta: 'textScore' }
   }).limit(5);
+  res.json(stores);
+};
+
+exports.mapStores = async (req, res) => {
+  const coordinates = [req.query.lng, req.query.lat].map(parseFloat);
+  const q = {
+    location: {
+      $near: {
+        $geometry: {
+          type: 'Point',
+          coordinates
+        },
+        $maxDistance: 10000 // 10km
+      }
+    }
+  };
+
+  const stores = await Store.find(q).select('slug name description location')
+    .limit(10);  // can alternatively use e.g. select('-author -location') to remove attributes from the result
   res.json(stores);
 };
