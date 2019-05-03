@@ -41,6 +41,13 @@ const storeSchema = new mongoose.Schema({
   }
 });
 
+// Define our indexes
+// Index as text below to allow efficient text based searches using mongo $text aggregation operations
+storeSchema.index({
+  name: 'text',
+  description: 'text'
+});
+
 storeSchema.pre('save', async function(next) {
   if (!this.isModified('name')) {
     next();
