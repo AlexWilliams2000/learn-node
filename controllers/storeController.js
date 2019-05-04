@@ -149,7 +149,11 @@ exports.mapStores = async (req, res) => {
     }
   };
 
-  const stores = await Store.find(q).select('slug name description location')
+  const stores = await Store.find(q).select('slug name description location photo')
     .limit(10);  // can alternatively use e.g. select('-author -location') to remove attributes from the result
   res.json(stores);
 };
+
+exports.mapPage = (req, res) => {
+  res.render('map', { title: 'Map' });
+}
