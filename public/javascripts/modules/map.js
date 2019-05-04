@@ -45,6 +45,9 @@ function loadPlaces(map, lat = 43.2, lng = -79.8) {
       // Zoom the map to make all th epins fit
       map.setCenter(bounds.getCenter());
       map.fitBounds(bounds);
+    })
+    .catch((err) => {
+      console.error(err);
     });
 }
 
