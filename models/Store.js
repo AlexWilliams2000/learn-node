@@ -39,6 +39,11 @@ const storeSchema = new mongoose.Schema({
     ref: 'User',
     required: 'You must supply an author!'
   }
+}, {
+  // Virtuals aren't returned by default, and have to be specifically referenced.
+  // Include this object if you want to override the default:
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 // Define our indexes
@@ -83,5 +88,13 @@ storeSchema.statics.getStoresByTag = function(tag) {
   const tagQuery = tag || { $exists: true };
   return this.find({ tags: tagQuery });
 };
+
+// Find reviews where store._id === review.store
+// Kind of equivalent to join in SQL
+storeSchema.virtual('reviews', {
+  ref: 'Review',    // Model to link to
+  localField: '_id',    // Which field on the store?
+  foreignField: 'store'   // Which field on the review?
+});
 
 module.exports = mongoose.model('Store', storeSchema);
