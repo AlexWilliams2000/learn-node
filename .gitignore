@@ -3,5 +3,8 @@ node_modules/
 *.log
 .idea
 haters/
-variables.env
+public/dist/
+#variables.env
 variables.env.now
+oldStoresDump.txt
+public/uploads/*
